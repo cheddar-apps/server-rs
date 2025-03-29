@@ -1,0 +1,17 @@
+[package]
+name = "cheddar-server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+protobuf = "3.7.2"
+protoc-bin-vendored = "3.1.0"
+serde = { version = "1.0.219", features = ["derive", "serde_derive"] }
+
+
+
+[build-dependencies]
+protobuf-codegen = "3.7.2"
+protobuf = "3.7.2"
+protoc-bin-vendored = "3.1.0"
+walkdir = "2.5.0"
