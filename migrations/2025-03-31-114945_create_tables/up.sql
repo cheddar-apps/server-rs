@@ -3,9 +3,9 @@ CREATE TABLE users (
     username VARCHAR(32) NOT NULL UNIQUE, -- 32 characters
     password_hash VARCHAR(60) NOT NULL, -- sha512 encrypt the password and then bcrypt that
     email VARCHAR(255) NOT NULL UNIQUE, -- theoretically there's no limit on email length, but..
-    
+
     servers INT[] NOT NULL, -- see comment in servers table
-    
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE servers (
 
     users INT[] NOT NULL, -- Can't do two users relations so it just has to be a
                           -- half-assed array of user ids
-                          
+
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -26,6 +26,7 @@ CREATE TABLE channels (
     server_id INT NOT NULL REFERENCES servers(id) ON DELETE CASCADE,
     name VARCHAR(72) NOT NULL, -- 72 characters
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    type INT NOT NULL DEFAULT 1 -- type of channel, 1 = text
 
     UNIQUE (server_id, name) -- unique channel names per server
 );

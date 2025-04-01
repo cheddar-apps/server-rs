@@ -1,0 +1,27 @@
+services:
+  cheddar:
+    build: .
+    container_name: cheddar
+    networks:
+      - cheddar
+    ports:
+      - 8080:8080
+    env_file:
+      - dev.env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: cheddar-postgres
+    networks:
+      - cheddar
+    env_file:
+      - dev.env
+    volumes:
+      - ./dev-persist/pg:/var/lib/postgresql/data
+    ports:
+      - 5432:5432 # allows psql / localhost diesel to connect easily
+networks:
+  cheddar:
+    external: false
